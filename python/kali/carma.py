@@ -37,9 +37,9 @@ except ImportError:
 fhgt = 10
 fwid = 16
 set_plot_params(useTex=True)
-COLORX = r'#984ea3'
-COLORY = r'#ff7f00'
-COLORS = [r'#4daf4a', r'#ccebc5']
+COLORX = '#984ea3'
+COLORY = '#ff7f00'
+COLORS = ['#4daf4a', '#ccebc5']
 ln10 = math.log(10)
 
 
@@ -162,23 +162,23 @@ class CARMATask(object):
                  nwalkers=25*psutil.cpu_count(logical=True), nsteps=250, maxEvals=10000, xTol=0.001,
                  mcmcA=2.0):
         try:
-            assert p > q, r'p must be greater than q'
-            assert p >= 1, r'p must be greater than or equal to 1'
-            assert isinstance(p, int), r'p must be an integer'
-            assert q >= 0, r'q must be greater than or equal to 0'
-            assert isinstance(q, int), r'q must be an integer'
-            assert nthreads > 0, r'nthreads must be greater than 0'
-            assert isinstance(nthreads, int), r'nthreads must be an integer'
-            assert nburn >= 0, r'nburn must be greater than or equal to 0'
-            assert isinstance(nburn, int), r'nburn must be an integer'
-            assert nwalkers > 0, r'nwalkers must be greater than 0'
-            assert isinstance(nwalkers, int), r'nwalkers must be an integer'
-            assert nsteps > 0, r'nsteps must be greater than 0'
-            assert isinstance(nsteps, int), r'nsteps must be an integer'
-            assert maxEvals > 0, r'maxEvals must be greater than 0'
-            assert isinstance(maxEvals, int), r'maxEvals must be an integer'
-            assert xTol > 0.0, r'xTol must be greater than 0'
-            assert isinstance(xTol, float), r'xTol must be a float'
+            assert p > q, 'p must be greater than q'
+            assert p >= 1, 'p must be greater than or equal to 1'
+            assert isinstance(p, int), 'p must be an integer'
+            assert q >= 0, 'q must be greater than or equal to 0'
+            assert isinstance(q, int), 'q must be an integer'
+            assert nthreads > 0, 'nthreads must be greater than 0'
+            assert isinstance(nthreads, int), 'nthreads must be an integer'
+            assert nburn >= 0, 'nburn must be greater than or equal to 0'
+            assert isinstance(nburn, int), 'nburn must be an integer'
+            assert nwalkers > 0, 'nwalkers must be greater than 0'
+            assert isinstance(nwalkers, int), 'nwalkers must be an integer'
+            assert nsteps > 0, 'nsteps must be greater than 0'
+            assert isinstance(nsteps, int), 'nsteps must be an integer'
+            assert maxEvals > 0, 'maxEvals must be greater than 0'
+            assert isinstance(maxEvals, int), 'maxEvals must be an integer'
+            assert xTol > 0.0, 'xTol must be greater than 0'
+            assert isinstance(xTol, float), 'xTol must be a float'
             self._p = p
             self._q = q
             self._ndims = self._p + self._q + 1
@@ -239,9 +239,9 @@ class CARMATask(object):
     @p.setter
     def p(self, value):
         try:
-            assert value > self._q, r'p must be greater than q'
-            assert value >= 1, r'p must be greater than or equal to 1'
-            assert isinstance(value, int), r'p must be an integer'
+            assert value > self._q, 'p must be greater than q'
+            assert value >= 1, 'p must be greater than or equal to 1'
+            assert isinstance(value, int), 'p must be an integer'
             self._taskCython.reset_CARMATask(value, self._q, self._nburn)
             self._p = value
             self._ndims = self._p + self._q + 1
@@ -257,9 +257,9 @@ class CARMATask(object):
     @q.setter
     def q(self, value):
         try:
-            assert value > self._q, r'p must be greater than q'
-            assert value >= 0, r'q must be greater than or equal to 0'
-            assert isinstance(value, int), r'q must be an integer'
+            assert value > self._q, 'p must be greater than q'
+            assert value >= 0, 'q must be greater than or equal to 0'
+            assert isinstance(value, int), 'q must be an integer'
             self._taskCython.reset_CARMATask(self._p, value, self._nburn)
             self._q = value
             self._ndims = self._p + self._q + 1
@@ -283,8 +283,8 @@ class CARMATask(object):
     @nburn.setter
     def nburn(self, nburnVal):
         try:
-            assert value >= 0, r'nburn must be greater than or equal to 0'
-            assert isinstance(value, int), r'nburn must be an integer'
+            assert value >= 0, 'nburn must be greater than or equal to 0'
+            assert isinstance(value, int), 'nburn must be an integer'
             self._taskCython.reset_CARMATask(self._p, self._q, value)
             self._nburn = value
         except AssertionError as err:
@@ -301,8 +301,8 @@ class CARMATask(object):
     @nwalkers.setter
     def nwalkers(self, value):
         try:
-            assert value >= 0, r'nwalkers must be greater than or equal to 0'
-            assert isinstance(value, int), r'nwalkers must be an integer'
+            assert value >= 0, 'nwalkers must be greater than or equal to 0'
+            assert isinstance(value, int), 'nwalkers must be an integer'
             self._nwalkers = value
             self._Chain = np.require(np.zeros(self._ndims*self._nwalkers*self._nsteps),
                                      requirements=['F', 'A', 'W', 'O', 'E'])
@@ -320,8 +320,8 @@ class CARMATask(object):
     @nsteps.setter
     def nsteps(self, value):
         try:
-            assert value >= 0, r'nsteps must be greater than or equal to 0'
-            assert isinstance(value, int), r'nsteps must be an integer'
+            assert value >= 0, 'nsteps must be greater than or equal to 0'
+            assert isinstance(value, int), 'nsteps must be an integer'
             self._nsteps = value
             self._Chain = np.require(np.zeros(self._ndims*self._nwalkers*self._nsteps),
                                      requirements=['F', 'A', 'W', 'O', 'E'])
@@ -339,8 +339,8 @@ class CARMATask(object):
     @maxEvals.setter
     def maxEvals(self, value):
         try:
-            assert value >= 0, r'maxEvals must be greater than or equal to 0'
-            assert isinstance(value, int), r'maxEvals must be an integer'
+            assert value >= 0, 'maxEvals must be greater than or equal to 0'
+            assert isinstance(value, int), 'maxEvals must be an integer'
             self._maxEvals = value
         except AssertionError as err:
             raise AttributeError(str(err))
@@ -352,8 +352,8 @@ class CARMATask(object):
     @xTol.setter
     def xTol(self, value):
         try:
-            assert value >= 0, r'xTol must be greater than or equal to 0'
-            assert isinstance(value, float), r'xTol must be a float'
+            assert value >= 0, 'xTol must be greater than or equal to 0'
+            assert isinstance(value, float), 'xTol must be a float'
             self._xTol = value
         except AssertionError as err:
             raise AttributeError(str(err))
@@ -365,8 +365,8 @@ class CARMATask(object):
     @mcmcA.setter
     def mcmcA(self, value):
         try:
-            assert value >= 0, r'mcmcA must be greater than or equal to 0.0'
-            assert isinstance(value, float), r'mcmcA must be a float'
+            assert value >= 0, 'mcmcA must be greater than or equal to 0.0'
+            assert isinstance(value, float), 'mcmcA must be a float'
             self._mcmcA = value
         except AssertionError as err:
             raise AttributeError(str(err))
@@ -474,17 +474,17 @@ class CARMATask(object):
         if nsteps is None:
             nsteps = self._nsteps
         try:
-            assert p > q, r'p must be greater than q'
-            assert p >= 1, r'p must be greater than or equal to 1'
-            assert isinstance(p, int), r'p must be an integer'
-            assert q >= 0, r'q must be greater than or equal to 0'
-            assert isinstance(q, int), r'q must be an integer'
-            assert nburn >= 0, r'nburn must be greater than or equal to 0'
-            assert isinstance(nburn, int), r'nburn must be an integer'
-            assert nwalkers > 0, r'nwalkers must be greater than 0'
-            assert isinstance(nwalkers, int), r'nwalkers must be an integer'
-            assert nsteps > 0, r'nsteps must be greater than 0'
-            assert isinstance(nsteps, int), r'nsteps must be an integer'
+            assert p > q, 'p must be greater than q'
+            assert p >= 1, 'p must be greater than or equal to 1'
+            assert isinstance(p, int), 'p must be an integer'
+            assert q >= 0, 'q must be greater than or equal to 0'
+            assert isinstance(q, int), 'q must be an integer'
+            assert nburn >= 0, 'nburn must be greater than or equal to 0'
+            assert isinstance(nburn, int), 'nburn must be an integer'
+            assert nwalkers > 0, 'nwalkers must be greater than 0'
+            assert isinstance(nwalkers, int), 'nwalkers must be an integer'
+            assert nsteps > 0, 'nsteps must be greater than 0'
+            assert isinstance(nsteps, int), 'nsteps must be an integer'
             self._taskCython.reset_CARMATask(p, q, nburn)
             self._p = p
             self._q = q
@@ -504,15 +504,15 @@ class CARMATask(object):
     def check(self, Theta, tnum=None):
         if tnum is None:
             tnum = 0
-        assert Theta.shape == (self._ndims,), r'Too many coefficients in Theta'
+        assert Theta.shape == (self._ndims,), 'Too many coefficients in Theta'
         return bool(self._taskCython.check_Theta(Theta, tnum))
 
     def set(self, dt, Theta, tnum=None):
         if tnum is None:
             tnum = 0
-        assert dt > 0.0, r'dt must be greater than 0.0'
-        assert isinstance(dt, float), r'dt must be a float'
-        assert Theta.shape == (self._ndims,), r'Too many coefficients in Theta'
+        assert dt > 0.0, 'dt must be greater than 0.0'
+        assert isinstance(dt, float), 'dt must be a float'
+        assert Theta.shape == (self._ndims,), 'Too many coefficients in Theta'
         return self._taskCython.set_System(dt, Theta, tnum)
 
     def dt(self, tnum=None):
@@ -793,17 +793,17 @@ class CARMATask(object):
             lagsM, acvfM = self.acvf(start=LC.dt, stop=LC.T, num=1000, spacing='linear')
         else:
             lagsM, acvfM = self.acvf(start=0.0, stop=1000.0, num=1000, spacing='linear')
-        plt.plot(lagsM, acvfM, label=r'model Autocovariance Function', color='#984ea3', zorder=5)
+        plt.plot(lagsM, acvfM, label='model Autocovariance Function', color='#984ea3', zorder=5)
         if LC is not None:
             if np.sum(LC.y) != 0.0:
                 lagsE, acvfE, acvferrE = LC.acvf(newdt)
                 if np.sum(acvfE) != 0.0:
-                    plt.errorbar(lagsE[1:], acvfE[1:], acvferrE[1:], label=r'obs. Autocovariance Function',
+                    plt.errorbar(lagsE[1:], acvfE[1:], acvferrE[1:], label='obs. Autocovariance Function',
                                  fmt='o', capsize=0, color='#ff7f00', markeredgecolor='none', zorder=0)
                     plt.xlim(lagsE[1], lagsE[-1])
-        plt.xlabel(r'$\delta t$')
-        plt.ylabel(r'$\log ACVF$')
-        plt.title(r'Autocovariance Function')
+        plt.xlabel('$\delta t$')
+        plt.ylabel('$\log ACVF$')
+        plt.title('Autocovariance Function')
         plt.legend(loc=3)
         if doShow:
             plt.show(False)
@@ -817,17 +817,17 @@ class CARMATask(object):
             lagsM, acfM = self.acf(start=LC.dt, stop=LC.T, num=1000, spacing='linear')
         else:
             lagsM, acfM = self.acf(start=0.0, stop=1000.0, num=1000, spacing='linear')
-        plt.plot(lagsM, acfM, label=r'model Autocorrelation Function', color='#984ea3', zorder=5)
+        plt.plot(lagsM, acfM, label='model Autocorrelation Function', color='#984ea3', zorder=5)
         if LC is not None:
             if np.sum(LC.y) != 0.0:
                 lagsE, acfE, acferrE = LC.acf(newdt)
                 if np.sum(acfE) != 0.0:
-                    plt.errorbar(lagsE[1:], acfE[1:], acferrE[1:], label=r'obs. Autocorrelation Function',
+                    plt.errorbar(lagsE[1:], acfE[1:], acferrE[1:], label='obs. Autocorrelation Function',
                                  fmt='o', capsize=0, color='#ff7f00', markeredgecolor='none', zorder=0)
                     plt.xlim(lagsE[1], lagsE[-1])
-        plt.xlabel(r'$\delta t$')
-        plt.ylabel(r'$\log ACF$')
-        plt.title(r'Autocorrelation Function')
+        plt.xlabel('$\delta t$')
+        plt.ylabel('$\log ACF$')
+        plt.title('Autocorrelation Function')
         plt.legend(loc=3)
         plt.ylim(-1.0, 1.0)
         if doShow:
@@ -844,18 +844,18 @@ class CARMATask(object):
         else:
             lagsM, sfM = self.sf(start=0.001, stop=1000.0, num=1000, spacing='log')
         plt.plot(np.log10(lagsM[1:]), np.log10(
-            sfM[1:]), label=r'model Structure Function', color='#984ea3', zorder=5)
+            sfM[1:]), label='model Structure Function', color='#984ea3', zorder=5)
         if LC is not None:
             if np.sum(LC.y) != 0.0:
                 if np.sum(sfE) != 0.0:
                     plt.scatter(
                         np.log10(lagsE[np.where(sfE != 0.0)[0]]), np.log10(sfE[np.where(sfE != 0.0)[0]]),
-                        marker='o', label=r'obs. Structure Function', color='#ff7f00', edgecolors='none',
+                        marker='o', label='obs. Structure Function', color='#ff7f00', edgecolors='none',
                         zorder=0)
         plt.xlim(math.log10(lagsM[1]), math.log10(lagsM[-1]))
-        plt.xlabel(r'$\delta t$')
-        plt.ylabel(r'$\log SF$')
-        plt.title(r'Structure Function')
+        plt.xlabel('$\delta t$')
+        plt.ylabel('$\log SF$')
+        plt.title('Structure Function')
         plt.legend(loc=2)
         if doShow:
             plt.show(False)
@@ -954,33 +954,33 @@ class CARMATask(object):
                              np.log10(periodogramE + periodogramerrE),
                              facecolor=colory, alpha=0.5, zorder=-5)
         plt.plot(np.log10(freqsM[1:]), np.log10(
-            psdM[1:]), label=r'$\ln PSD$', color='#000000', zorder=5, linewidth=6)
+            psdM[1:]), label='\ln PSD', color='#000000', zorder=5, linewidth=6)
         plt.plot(np.log10(freqsM[1:]), np.log10(psdNumer[1:]),
-                 label=r'$\ln PSD_{\mathrm{numerator}}$', color='#1f78b4', zorder=0, linewidth=4)
+                 label='\ln PSD_{\mathrm{numerator}}', color='#1f78b4', zorder=0, linewidth=4)
         plt.plot(np.log10(freqsM[1:]), -np.log10(psdDenom[1:]),
-                 label=r'$-\ln PSD_{\mathrm{denominator}}$', color='#e31a1c', zorder=0, linewidth=4)
+                 label='-\ln PSD_{\mathrm{denominator}$', color='#e31a1c', zorder=0, linewidth=4)
         for i in xrange(psdNumerComp.shape[1]):
             plt.plot(np.log10(freqsM[1:]), np.log10(psdNumerComp[1:, i]),
-                     color='#a6cee3', zorder=0, linewidth=2, linestyle=r'dashed')
+                     color='#a6cee3', zorder=0, linewidth=2, linestyle='dashed')
             plt.annotate(
-                r'$\nu^{%d}$'%(2*i), xy=(np.log10(freqsM[25]), np.log10(psdNumerComp[25, i])),
+                '\nu^%d'%(2*i), xy=(np.log10(freqsM[25]), np.log10(psdNumerComp[25, i])),
                 xycoords='data', xytext=(np.log10(freqsM[25]) + 0.25, np.log10(psdNumerComp[25, i]) + 0.5),
                 textcoords='data', arrowprops=dict(
                     arrowstyle='->', connectionstyle='angle3, angleA = 0, angleB = 90'),
                 ha='center', va='center', multialignment='center', zorder=100)
         for i in xrange(psdDenomComp.shape[1]):
             plt.plot(np.log10(freqsM[1:]), -np.log10(psdDenomComp[1:, i]),
-                     color='#fb9a99', zorder=0, linewidth=2, linestyle=r'dashed')
+                     color='#fb9a99', zorder=0, linewidth=2, linestyle='dashed')
             plt.annotate(
-                r'$\nu^{%d}$'%(-2*i), xy=(np.log10(freqsM[-25]), -np.log10(psdDenomComp[-25, i])),
+                '\nu^{%d}'%(-2*i), xy=(np.log10(freqsM[-25]), -np.log10(psdDenomComp[-25, i])),
                 xycoords='data', xytext=(np.log10(freqsM[-25]) - 0.25, -np.log10(psdDenomComp[-25, i]) - 0.5),
                 textcoords='data', arrowprops=dict(
                     arrowstyle='->', connectionstyle='angle3, angleA = 0, angleB = 90'),
                 ha='center', va='center', multialignment='center', zorder=100)
         plt.xlim(math.log10(freqsM[1]), math.log10(freqsM[-1]))
-        plt.xlabel(r'$\log \nu$')
-        plt.ylabel(r'$\log PSD$')
-        plt.title(r'Power Spectral Density')
+        plt.xlabel('\log \nu')
+        plt.ylabel('\log PSD')
+        plt.title('Power Spectral Density')
         plt.legend(loc=3)
         if doShow:
             plt.show(False)
@@ -1174,17 +1174,17 @@ class CARMATask(object):
                                 np.max(self.LnPosterior[self.nsteps/2:]))[0][0]
                 loc1 = np.where(self.LnPosterior[self.nsteps/2:] ==
                                 np.max(self.LnPosterior[self.nsteps/2:]))[1][0]
-                plt.axvline(x=self.timescaleChain[dimx, loc0, loc1], c=r'#ffff00', label=r'Best %s'%(labelx))
-                plt.axhline(y=self.timescaleChain[dimy, loc0, loc1], c=r'#ffff00', label=r'Best %s'%(labely))
+                plt.axvline(x=self.timescaleChain[dimx, loc0, loc1], c='#ffff00', label='Best %s'%(labelx))
+                plt.axhline(y=self.timescaleChain[dimy, loc0, loc1], c='#ffff00', label='Best %s'%(labely))
             if median:
                 medx = np.median(self.timescaleChain[dimx, :, self.nsteps/2:])
                 medy = np.median(self.timescaleChain[dimy, :, self.nsteps/2:])
-                plt.axvline(x=medx, c=r'#ff00ff', label=r'Median %s'%(labelx))
-                plt.axhline(y=medy, c=r'#ff00ff', labely=r'Median %s'%(labely))
+                plt.axvline(x=medx, c='#ff00ff', label='Median %s'%(labelx))
+                plt.axhline(y=medy, c='#ff00ff', labely='Median %s'%(labely))
         if truthx is not None:
-            plt.axvline(x=truthx, c=r'#000000')
+            plt.axvline(x=truthx, c='#000000')
         if truthy is not None:
-            plt.axhline(y=truthy, c=r'#000000')
+            plt.axhline(y=truthy, c='#000000')
         if labelx is not None:
             plt.xlabel(labelx)
         if labely is not None:
@@ -1199,17 +1199,17 @@ class CARMATask(object):
             plt.clf()
         if dim < self.ndims:
             for i in xrange(self.nwalkers):
-                plt.plot(self.timescaleChain[dim, i, :], c=r'#0000ff', alpha=0.1)
-            plt.plot(np.median(self.timescaleChain[dim, :, :], axis=0), c=r'#ff0000')
+                plt.plot(self.timescaleChain[dim, i, :], c='#0000ff', alpha=0.1)
+            plt.plot(np.median(self.timescaleChain[dim, :, :], axis=0), c='#ff0000')
             plt.fill_between(range(self.nsteps),
                              np.median(self.timescaleChain[dim, :, :], axis=0) -
                              np.std(self.timescaleChain[dim, :, :], axis=0),
                              np.median(self.timescaleChain[dim, :, :], axis=0) +
                              np.std(self.timescaleChain[dim, :, :], axis=0),
-                             color=r'#ff0000', alpha=0.1)
+                             color='#ff0000', alpha=0.1)
         if truth is not None:
-            plt.axhline(truth, c=r'#000000')
-        plt.xlabel(r'step \#')
+            plt.axhline(truth, c='#000000')
+        plt.xlabel('step \#')
         if label is not None:
             plt.ylabel(label)
         if doShow:
@@ -1222,10 +1222,10 @@ class CARMATask(object):
                                           axis1=0, axis2=1)
         stochasticLabels = []
         for i in xrange(self.p):
-            stochasticLabels.append(r'$\tau_{\mathrm{AR,} %d}$ (d)'%(i + 1))
+            stochasticLabels.append('$\tau_{\mathrm{AR,} %d}$ (d)'%(i + 1))
         for i in xrange(self.q):
-            stochasticLabels.append(r'$\tau_{\mathrm{MA,} %d}$ (d)'%(i + 1))
-        stochasticLabels.append(r'$\mathrm{Amp.}$')
+            stochasticLabels.append('$\tau_{\mathrm{MA,} %d}$ (d)'%(i + 1))
+        stochasticLabels.append('$\mathrm{Amp.}$')
         newFig = kali.util.triangle.corner(flatStochasticChain, labels=stochasticLabels,
                                            show_titles=True,
                                            title_fmt='.2e',
